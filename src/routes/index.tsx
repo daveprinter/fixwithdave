@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MonitorCheck, Shapes, ShieldCheck, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 import davidAsset from "../assets/david.jpeg.asset.json";
 import gameCod from "../assets/game-cod.jpg";
