@@ -2,12 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
 
 import davidAsset from "../assets/david.jpeg.asset.json";
+import serviceOffice from "../assets/service-office.jpg";
+import serviceCad from "../assets/service-cad.jpg";
+import serviceWindows from "../assets/service-windows.jpg";
 import gameCod from "../assets/game-cod.jpg";
 import gameGta from "../assets/game-gta.jpg";
 import gameFifa from "../assets/game-fifa.jpg";
 import gameMk from "../assets/game-mk.jpg";
 
-const WHATSAPP_URL = "https://wa.me/254700000000?text=Hi%20David!%20I%20need%20help%20with%20my%20PC.";
+const WHATSAPP_URL =
+  "https://wa.me/254716345324?text=" +
+  encodeURIComponent("Hello there. I would like to inquire about your services.");
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +41,8 @@ const services = [
     letter: "M",
     iconColor: "text-blue-600",
     iconBg: "bg-blue-600/10",
+    img: serviceOffice,
+    imgAlt: "Microsoft 365 apps on a laptop illustration",
     title: "Microsoft 365 Suite",
     items: ["Word, Excel, PowerPoint", "Access & Publisher", "Outlook & OneNote"],
     highlight: "+ Free Lifetime Activation",
@@ -45,6 +52,8 @@ const services = [
     letter: "A",
     iconColor: "text-orange-600",
     iconBg: "bg-orange-600/10",
+    img: serviceCad,
+    imgAlt: "Architectural CAD blueprint on a monitor illustration",
     title: "Arch & Design",
     items: ["AutoCAD & ArchiCAD", "Revit & SketchUp", "Adobe Creative Suite", "Engineering Utilities"],
     tag: "All Versions",
@@ -53,6 +62,8 @@ const services = [
     letter: "W",
     iconColor: "text-emerald-600",
     iconBg: "bg-emerald-600/10",
+    img: serviceWindows,
+    imgAlt: "Windows security shield over a laptop illustration",
     title: "Windows & Security",
     items: ["Win 10/11 Fresh Install", "Driver Updates & Repair", "Ransomware/Virus Removal", "System Recovery"],
     tag: "Fast Service",
