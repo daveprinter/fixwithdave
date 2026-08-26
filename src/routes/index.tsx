@@ -142,10 +142,10 @@ function Index() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2 text-sm font-bold text-card transition-all hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-3 py-2 text-sm font-bold text-card transition-all hover:brightness-110 sm:px-5 sm:py-2"
             >
               <MessageCircle className="h-4 w-4" />
-              Chat on WhatsApp
+              <span className="hidden sm:inline">Chat on WhatsApp</span>
             </a>
           </div>
         </div>
