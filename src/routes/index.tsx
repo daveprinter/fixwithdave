@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { MessageCircle, Menu } from "lucide-react";
 
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import davidAsset from "../assets/david.jpeg.asset.json";
 import serviceOffice from "../assets/service-office.jpg";
 import serviceCad from "../assets/service-cad.jpg";
 import serviceWindows from "../assets/service-windows.jpg";
+import serviceAssignments from "../assets/service-assignments.jpg";
 import gameCod from "../assets/game-cod.jpg";
 import gameGta from "../assets/game-gta.jpg";
 import gameFifa from "../assets/game-fifa.jpg";
@@ -21,13 +24,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Software installation, PC troubleshooting, Windows 10/11 setup, storage cleanup, virus removal and game installs for university students. By David.",
+          "Software installation, PC troubleshooting, Windows 10/11 setup, storage cleanup, virus removal, game installs and academic assignments for university students. By David.",
       },
       { property: "og:title", content: "TechTally with Dave — Campus PC Services" },
       {
         property: "og:description",
         content:
-          "Software installation, PC troubleshooting, Windows setup, storage cleanup and game installs for university students.",
+          "Software installation, PC troubleshooting, Windows setup, storage cleanup, game installs and academic help for university students.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,6 +41,7 @@ export const Route = createFileRoute("/")({
 
 const services = [
   {
+    id: "microsoft-365",
     letter: "M",
     iconColor: "text-blue-600",
     iconBg: "bg-blue-600/10",
@@ -49,6 +53,7 @@ const services = [
     tag: "Available Now",
   },
   {
+    id: "arch-design",
     letter: "A",
     iconColor: "text-orange-600",
     iconBg: "bg-orange-600/10",
@@ -59,6 +64,7 @@ const services = [
     tag: "All Versions",
   },
   {
+    id: "windows-security",
     letter: "W",
     iconColor: "text-emerald-600",
     iconBg: "bg-emerald-600/10",
@@ -67,6 +73,17 @@ const services = [
     title: "Windows & Security",
     items: ["Win 10/11 Fresh Install", "Driver Updates & Repair", "Ransomware/Virus Removal", "System Recovery"],
     tag: "Fast Service",
+  },
+  {
+    id: "assignments",
+    letter: "P",
+    iconColor: "text-purple-600",
+    iconBg: "bg-purple-600/10",
+    img: serviceAssignments,
+    imgAlt: "Student working on academic assignment on laptop illustration",
+    title: "Assignments & Projects",
+    items: ["Writing Assignments", "Research Projects", "Reports & Proposals", "Editing & Formatting"],
+    tag: "Academic Help",
   },
 ];
 
@@ -77,7 +94,18 @@ const games = [
   { img: gameMk, title: "Mortal Kombat", sub: "XL / 11 / 1", alt: "Mortal Kombat fighting game style art" },
 ];
 
+const sideMenu = [
+  { title: "Microsoft 365 Suite", href: "#microsoft-365" },
+  { title: "Arch & Design", href: "#arch-design" },
+  { title: "Windows & Security", href: "#windows-security" },
+  { title: "Assignments & Projects", href: "#assignments" },
+  { title: "Storage Fix", href: "#storage" },
+  { title: "Gaming", href: "#gaming" },
+];
+
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background font-sans text-secondary">
       {/* Navigation */}
@@ -93,22 +121,73 @@ function Index() {
               TechTally <span className="text-primary">with Dave</span>
             </span>
           </a>
+
           <div className="hidden gap-8 text-sm font-medium md:flex">
             <a href="#services" className="transition-colors hover:text-primary">Services</a>
             <a href="#gaming" className="transition-colors hover:text-primary">Gaming</a>
             <a href="#storage" className="transition-colors hover:text-primary">Storage Fix</a>
           </div>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2 text-sm font-bold text-card transition-all hover:brightness-110"
-          >
-            <MessageCircle className="h-4 w-4" />
-            Chat on WhatsApp
-          </a>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50"
+              aria-label="Open services menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2 text-sm font-bold text-card transition-all hover:brightness-110"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </a>
+          </div>
         </div>
       </nav>
+
+      {/* Services Menu Side Panel */}
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+        <SheetContent side="right" className="w-[80vw] sm:max-w-sm">
+          <SheetHeader className="text-left">
+            <SheetTitle className="text-2xl font-bold italic">All Services</SheetTitle>
+            <SheetDescription>
+              Browse everything David can help you with. Tap any service to jump to it.
+            </SheetDescription>
+          </SheetHeader>
+
+          <div className="mt-8 flex flex-col gap-2">
+            {sideMenu.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl border border-slate-100 bg-card px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
+              >
+                {item.title}
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-6 border-t border-slate-200 pt-6">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-bold text-card transition-all hover:brightness-110"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </a>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       {/* Hero */}
       <header id="top" className="relative overflow-hidden px-6 py-20">
@@ -152,10 +231,11 @@ function Index() {
             <p className="text-slate-500">Professional installation for the tools you need to succeed.</p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s) => (
               <div
                 key={s.title}
+                id={s.id}
                 className="group overflow-hidden rounded-2xl border border-slate-100 bg-background p-0 transition-all duration-300 hover:bg-card hover:shadow-xl"
               >
                 <div className="relative">
