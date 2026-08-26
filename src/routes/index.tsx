@@ -192,6 +192,7 @@ function Index() {
                     Book Now →
                   </a>
                 </div>
+                </div>
               </div>
             ))}
           </div>
