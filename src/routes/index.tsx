@@ -12,10 +12,15 @@ import gameCod from "../assets/game-cod.jpg";
 import gameGta from "../assets/game-gta.jpg";
 import gameFifa from "../assets/game-fifa.jpg";
 import gameMk from "../assets/game-mk.jpg";
+import flyerAsset from "../assets/techtally-flyer.jpg.asset.json";
+
+const SITE_URL = "https://project--37abc8ca-b270-419d-9641-d850f4410a21.lovable.app";
+const FLYER_URL = SITE_URL + flyerAsset.url;
 
 const WHATSAPP_URL =
   "https://wa.me/254716345324?text=" +
   encodeURIComponent("Hello there. I would like to inquire about your services.");
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
