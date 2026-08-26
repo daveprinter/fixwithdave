@@ -83,10 +83,12 @@ function Index() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 border-b border-slate-200 bg-card/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <a href="#top" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary font-bold text-primary-foreground">
-              T
-            </div>
+          <a href="#top" className="flex items-center gap-3">
+            <img
+              src={davidAsset.url}
+              alt="David — TechTally with Dave"
+              className="h-10 w-10 rounded-full border-2 border-primary/20 object-cover"
+            />
             <span className="text-xl font-bold tracking-tight">
               TechTally <span className="text-primary">with Dave</span>
             </span>
@@ -110,47 +112,34 @@ function Index() {
 
       {/* Hero */}
       <header id="top" className="relative overflow-hidden px-6 py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-          <div>
-            <span className="mb-6 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary italic">
-              Nairobi's #1 Campus Tech Guru
-            </span>
-            <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
-              PC Problems? <br />
-              <span className="text-primary">Consider it Done.</span>
-            </h1>
-            <p className="mb-8 max-w-lg text-lg text-slate-600">
-              I am David. I help university students optimize their laptops for engineering,
-              design, and gaming. From Windows activation to clearing mysterious storage,
-              I've got you covered.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="#services"
-                className="rounded-xl bg-secondary px-8 py-4 font-bold text-secondary-foreground transition-all hover:bg-slate-800"
-              >
-                View All Services
-              </a>
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-card px-4 py-2">
-                <div className="flex -space-x-2">
-                  <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-200" />
-                  <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-300" />
-                  <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-400" />
-                </div>
-                <span className="text-xs font-semibold text-slate-500">50+ Students Fixed This Week</span>
+        <div className="mx-auto max-w-4xl text-center">
+          <span className="mb-6 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary italic">
+            Nairobi's #1 Campus Tech Guru
+          </span>
+          <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
+            PC Problems? <br />
+            <span className="text-primary">Consider it Done.</span>
+          </h1>
+          <p className="mx-auto mb-8 max-w-lg text-lg text-slate-600">
+            I am David. I help university students optimize their laptops for engineering,
+            design, and gaming. From Windows activation to clearing mysterious storage,
+            I've got you covered.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="#services"
+              className="rounded-xl bg-secondary px-8 py-4 font-bold text-secondary-foreground transition-all hover:bg-slate-800"
+            >
+              View All Services
+            </a>
+            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-card px-4 py-2">
+              <div className="flex -space-x-2">
+                <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-200" />
+                <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-300" />
+                <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-400" />
               </div>
+              <span className="text-xs font-semibold text-slate-500">50+ Students Fixed This Week</span>
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-4 -rotate-2 rounded-3xl bg-primary/5" />
-            <img
-              src={davidAsset.url}
-              alt="David — campus PC technician at TechTally with Dave"
-              width={1080}
-              height={1080}
-              fetchPriority="high"
-              className="relative aspect-square w-full rounded-3xl object-cover shadow-2xl outline-1 -outline-offset-1 outline-black/5"
-            />
           </div>
         </div>
       </header>
@@ -167,11 +156,24 @@ function Index() {
             {services.map((s) => (
               <div
                 key={s.title}
-                className="group rounded-2xl border border-slate-100 bg-background p-8 transition-all duration-300 hover:bg-card hover:shadow-xl"
+                className="group overflow-hidden rounded-2xl border border-slate-100 bg-background p-0 transition-all duration-300 hover:bg-card hover:shadow-xl"
               >
-                <div className={`mb-6 flex h-12 w-12 items-center justify-center rounded-lg ${s.iconBg} ${s.iconColor}`}>
-                  <span className="font-bold">{s.letter}</span>
+                <div className="relative">
+                  <img
+                    src={s.img}
+                    alt={s.imgAlt}
+                    width={800}
+                    height={512}
+                    loading="lazy"
+                    className="aspect-[8/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div
+                    className={`absolute -bottom-6 left-8 flex h-12 w-12 items-center justify-center rounded-lg shadow-lg ${s.iconBg} ${s.iconColor} bg-card`}
+                  >
+                    <span className="font-bold">{s.letter}</span>
+                  </div>
                 </div>
+                <div className="p-8 pt-10">
                 <h3 className="mb-3 text-xl font-bold italic">{s.title}</h3>
                 <ul className="mb-6 space-y-2 text-sm text-slate-600">
                   {s.items.map((item) => (
