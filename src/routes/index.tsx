@@ -38,6 +38,8 @@ export const Route = createFileRoute("/")({
           "Software installation, PC troubleshooting, Windows setup, storage cleanup, game installs and academic help for university students.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: FLYER_URL },
+      { name: "twitter:image", content: FLYER_URL },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -198,7 +200,7 @@ function Index() {
       <header id="top" className="relative overflow-hidden px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <span className="mb-6 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary italic">
-            Nairobi's #1 Campus Tech Guru
+            SEKU's #1 Campus Tech Guru
           </span>
           <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
             PC Problems? <br />
@@ -326,6 +328,57 @@ function Index() {
                     CLEAN IT NOW
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About David */}
+      <section id="about" className="bg-card py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 md:grid-cols-2">
+            <div className="relative mx-auto w-full max-w-md md:mx-0">
+              <img
+                src={davidAsset.url}
+                alt="David — TechTally with Dave"
+                width={600}
+                height={600}
+                loading="lazy"
+                className="aspect-square w-full rounded-3xl object-cover shadow-2xl"
+              />
+              <div className="absolute -bottom-6 -right-6 hidden rounded-2xl bg-primary px-6 py-4 text-primary-foreground shadow-lg md:block">
+                <p className="text-3xl font-black">3+</p>
+                <p className="text-xs font-semibold uppercase tracking-wide">Years Helping Students</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="mb-4 text-4xl font-bold italic">About David</h2>
+              <p className="mb-6 text-lg text-slate-600">
+                Hi, I'm David — the guy behind TechTally with Dave. I started fixing laptops for classmates
+                and quickly became the go-to person for software installs, Windows setup, and PC troubleshooting
+                around campus.
+              </p>
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "Hands-on Experience",
+                    desc: "From fresh Windows installs to clearing hidden storage and removing ransomware, I've handled hundreds of student laptops.",
+                  },
+                  {
+                    title: "Engineering & Design Focused",
+                    desc: "I specialize in the heavy tools students actually need: AutoCAD, Revit, ArchiCAD, Adobe Creative Suite, and Microsoft 365.",
+                  },
+                  {
+                    title: "Fast, On-Campus Support",
+                    desc: "I'm based at the Common Services Block, so you don't have to wait days for a fix. Most jobs are done the same day you drop a text.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl border border-slate-200 bg-background p-5">
+                    <h3 className="mb-1 font-bold text-secondary">{item.title}</h3>
+                    <p className="text-sm text-slate-600">{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
