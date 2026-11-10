@@ -13,10 +13,10 @@ import gameCod from "../assets/game-cod.jpg";
 import gameGta from "../assets/game-gta.jpg";
 import gameFifa from "../assets/game-fifa.jpg";
 import gameMk from "../assets/game-mk.jpg";
-import flyerAsset from "../assets/techtally-flyer.jpg.asset.json";
+import techtallyFlyer from "../assets/techtally-share-flyer.jpg";
 
-const SITE_URL = "https://project--37abc8ca-b270-419d-9641-d850f4410a21.lovable.app";
-const FLYER_URL = SITE_URL + flyerAsset.url;
+const SITE_URL = "https://fixwithdave.lovable.app";
+const FLYER_URL = SITE_URL + techtallyFlyer;
 
 const WHATSAPP_URL =
   "https://wa.me/254716345324?text=" +
@@ -268,7 +268,7 @@ function Index() {
                 </ul>
                 <div className="flex items-center justify-between border-t border-slate-200 pt-4">
                   <span className="text-xs font-bold uppercase text-slate-400">{s.tag}</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                     <a
                     href={WHATSAPP_URL}
                     target="_blank"
