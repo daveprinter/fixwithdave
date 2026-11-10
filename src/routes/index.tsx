@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { MessageCircle, Menu } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import davidAsset from "../assets/david.jpeg.asset.json";
+import techtallyIcon from "../assets/techtally-icon.png";
 import serviceOffice from "../assets/service-office.jpg";
 import serviceCad from "../assets/service-cad.jpg";
 import serviceWindows from "../assets/service-windows.jpg";
@@ -25,17 +26,17 @@ const WHATSAPP_URL =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TechTally with Dave — Campus PC Services in Nairobi" },
+      { title: "TechTally — PC Support & Software Services" },
       {
         name: "description",
         content:
-          "Software installation, PC troubleshooting, Windows 10/11 setup, storage cleanup, virus removal, game installs and academic assignments for university students. By David.",
+          "PC software installation, troubleshooting, Windows setup, storage cleanup, security support, game installs, and writing and project services.",
       },
-      { property: "og:title", content: "TechTally with Dave — Campus PC Services" },
+      { property: "og:title", content: "TechTally — PC Support & Software Services" },
       {
         property: "og:description",
         content:
-          "Software installation, PC troubleshooting, Windows setup, storage cleanup, game installs and academic help for university students.",
+          "Software installation, PC troubleshooting, Windows setup, storage cleanup, game installs, and writing and project services.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: FLYER_URL },
@@ -87,7 +88,7 @@ const services = [
     iconColor: "text-purple-600",
     iconBg: "bg-purple-600/10",
     img: serviceAssignments,
-    imgAlt: "Student working on academic assignment on laptop illustration",
+    imgAlt: "Laptop illustration for writing and project support",
     title: "Assignments & Projects",
     items: ["Writing Assignments", "Research Projects", "Reports & Proposals", "Editing & Formatting"],
     tag: "Academic Help",
@@ -120,13 +121,11 @@ function Index() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <a href="#top" className="flex items-center gap-3">
             <img
-              src={davidAsset.url}
-              alt="David — TechTally with Dave"
-              className="h-10 w-10 rounded-full border-2 border-primary/20 object-cover"
+              src={techtallyIcon}
+              alt="TechTally logo"
+              className="h-10 w-10 rounded-lg object-cover"
             />
-            <span className="text-xl font-bold tracking-tight">
-              TechTally <span className="text-primary">with Dave</span>
-            </span>
+            <span className="text-xl font-bold tracking-tight">TechTally</span>
           </a>
 
           <div className="hidden gap-8 text-sm font-medium md:flex">
@@ -164,7 +163,7 @@ function Index() {
           <SheetHeader className="text-left">
             <SheetTitle className="text-2xl font-bold italic">All Services</SheetTitle>
             <SheetDescription>
-              Browse everything David can help you with. Tap any service to jump to it.
+              Browse TechTally services. Tap any service to jump to it.
             </SheetDescription>
           </SheetHeader>
 
@@ -200,16 +199,15 @@ function Index() {
       <header id="top" className="relative overflow-hidden px-6 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <span className="mb-6 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary italic">
-            SEKU's #1 Campus Tech Guru
+            SOFTWARE · REPAIRS · PC SUPPORT
           </span>
           <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
             PC Problems? <br />
             <span className="text-primary">Consider it Done.</span>
           </h1>
           <p className="mx-auto mb-8 max-w-lg text-lg text-slate-600">
-            I am David. I help university students optimize their laptops for engineering,
-            design, and gaming. From Windows activation to clearing mysterious storage,
-            I've got you covered.
+            TechTally provides PC support for customers and businesses, from software installation
+            and Windows setup to security cleanup, storage troubleshooting, and game installs.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -224,7 +222,7 @@ function Index() {
                 <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-300" />
                 <div className="h-8 w-8 rounded-full border-2 border-card bg-slate-400" />
               </div>
-              <span className="text-xs font-semibold text-slate-500">50+ Students Fixed This Week</span>
+              <span className="text-xs font-semibold text-slate-500">Helping customers and clients</span>
             </div>
           </div>
         </div>
@@ -270,7 +268,8 @@ function Index() {
                 </ul>
                 <div className="flex items-center justify-between border-t border-slate-200 pt-4">
                   <span className="text-xs font-bold uppercase text-slate-400">{s.tag}</span>
-                  <a
+                    <div className="flex items-center gap-2">
+                    <a
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noreferrer"
@@ -278,6 +277,10 @@ function Index() {
                   >
                     Book Now →
                   </a>
+                    <Button type="button" size="sm" disabled title="Online payments will be available after payment setup.">
+                      Pay Now
+                    </Button>
+                    </div>
                 </div>
                 </div>
               </div>
@@ -296,8 +299,8 @@ function Index() {
                   What's eating your space?
                 </h2>
                 <p className="mb-8 text-lg text-slate-300">
-                  Disk full but can't find the files? I specialize in deep-cleaning university
-                  laptops. I find the hidden logs, temporary junk, and oversized caches that
+                  Disk full but can't find the files? TechTally helps identify hidden logs,
+                  temporary junk, and oversized caches that
                   common cleaners miss.
                 </p>
                 <div className="space-y-4">
@@ -334,44 +337,46 @@ function Index() {
         </div>
       </section>
 
-      {/* About David */}
+      {/* About TechTally */}
       <section id="about" className="bg-card py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div className="relative mx-auto w-full max-w-md md:mx-0">
-              <img
-                src={davidAsset.url}
-                alt="David — TechTally with Dave"
-                width={600}
-                height={600}
-                loading="lazy"
-                className="aspect-square w-full rounded-3xl object-cover shadow-2xl"
-              />
+              <div className="flex aspect-square items-center justify-center rounded-3xl bg-card p-12 shadow-2xl">
+                <img
+                  src={techtallyIcon}
+                  alt="TechTally logo"
+                  width={400}
+                  height={400}
+                  loading="lazy"
+                  className="h-full w-full object-contain"
+                />
+              </div>
               <div className="absolute -bottom-6 -right-6 hidden rounded-2xl bg-primary px-6 py-4 text-primary-foreground shadow-lg md:block">
-                <p className="text-3xl font-black">3+</p>
-                <p className="text-xs font-semibold uppercase tracking-wide">Years Helping Students</p>
+                <p className="text-xl font-black">PC SUPPORT</p>
+                <p className="text-xs font-semibold uppercase tracking-wide">Install · repair · optimize</p>
               </div>
             </div>
             <div>
-              <h2 className="mb-4 text-4xl font-bold italic">About David</h2>
+              <h2 className="mb-4 text-4xl font-bold italic">About TechTally</h2>
               <p className="mb-6 text-lg text-slate-600">
-                Hi, I'm David — the guy behind TechTally with Dave. I started fixing laptops for classmates
-                and quickly became the go-to person for software installs, Windows setup, and PC troubleshooting
-                around campus.
+                TechTally offers computer setup and troubleshooting, including software installations,
+                Windows setup, security cleanup, storage diagnostics, and PC game installs. Customers
+                get clear explanations and support tailored to their device.
               </p>
               <div className="space-y-4">
                 {[
                   {
                     title: "Hands-on Experience",
-                    desc: "From fresh Windows installs to clearing hidden storage and removing ransomware, I've handled hundreds of student laptops.",
+                    desc: "Support for Windows setup, storage issues, malware cleanup, and common PC problems.",
                   },
                   {
                     title: "Engineering & Design Focused",
-                    desc: "I specialize in the heavy tools students actually need: AutoCAD, Revit, ArchiCAD, Adobe Creative Suite, and Microsoft 365.",
+                    desc: "Installation support for AutoCAD, Revit, ArchiCAD, Adobe Creative Suite, and Microsoft 365.",
                   },
                   {
-                    title: "Fast, On-Campus Support",
-                    desc: "I'm based at the Common Services Block, so you don't have to wait days for a fix. Most jobs are done the same day you drop a text.",
+                    title: "Straightforward Support",
+                    desc: "Contact TechTally to discuss the issue, arrange a service, and confirm the expected turnaround.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-slate-200 bg-background p-5">
@@ -422,7 +427,7 @@ function Index() {
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="mb-6 text-4xl font-bold">Don't struggle with errors alone.</h2>
           <p className="mb-10 text-lg text-primary-foreground/80">
-            I'm available daily at the school of common services. Just drop a text and I'll be there to help.
+            For software installation, troubleshooting, and PC support, send a message to get started.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <a
@@ -431,7 +436,7 @@ function Index() {
               rel="noreferrer"
               className="rounded-2xl bg-card px-10 py-4 text-xl font-black text-primary transition-all hover:shadow-lg"
             >
-              Contact David Now
+              Contact TechTally
             </a>
             <div className="flex items-center justify-center rounded-2xl border border-white/20 bg-black/20 px-10 py-4 font-mono text-sm">
               LOC: Common Services Block
@@ -443,7 +448,7 @@ function Index() {
       {/* Footer */}
       <footer className="border-t border-slate-200 py-12 text-center">
         <p className="text-sm text-slate-400">
-          © {new Date().getFullYear()} TechTally with Dave. All PC services professionally handled.
+          © {new Date().getFullYear()} TechTally. PC support and software services.
         </p>
       </footer>
     </div>
