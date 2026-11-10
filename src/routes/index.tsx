@@ -322,14 +322,19 @@ function Index() {
                 </div>
                 <p className="text-center font-mono text-sm">DISK CAPACITY: 95% FULL</p>
                 <div className="mt-8 flex justify-center">
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-xl bg-accent px-8 py-3 text-lg font-black text-accent-foreground transition-transform hover:scale-105"
-                  >
-                    CLEAN IT NOW
-                  </a>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-xl bg-accent px-8 py-3 text-lg font-black text-accent-foreground transition-transform hover:scale-105"
+                    >
+                      CLEAN IT NOW
+                    </a>
+                    <Button type="button" disabled title="Online payments will be available after payment setup.">
+                      Pay Now
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -415,6 +420,15 @@ function Index() {
                 <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-transparent to-transparent p-6">
                   <h4 className="text-lg font-bold text-card">{g.title}</h4>
                   <p className="text-xs text-card/60">{g.sub}</p>
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled
+                    title="Online payments will be available after payment setup."
+                    className="mt-3 w-fit"
+                  >
+                    Pay Now
+                  </Button>
                 </div>
               </div>
             ))}
