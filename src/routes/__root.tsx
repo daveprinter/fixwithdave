@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TechTally with Dave" },
+      { title: "TechTally — PC Support & Software Services" },
       {
         name: "description",
         content:
-          "Campus PC services by David: software installation, troubleshooting, Windows setup, storage cleanup and game installs.",
+          "PC software installation, troubleshooting, Windows setup, storage cleanup, security support, and game installs.",
       },
-      { name: "author", content: "TechTally with Dave" },
-      { property: "og:title", content: "TechTally with Dave" },
+      { name: "author", content: "TechTally" },
+      { property: "og:title", content: "TechTally — PC Support & Software Services" },
       {
         property: "og:description",
         content:
-          "Campus PC services by David: software installation, troubleshooting, Windows setup, storage cleanup and game installs.",
+          "PC software installation, troubleshooting, Windows setup, storage cleanup, security support, and game installs.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
