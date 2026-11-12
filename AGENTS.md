@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep service catalog edits in Lovable Cloud with server-verified admin access; browser code never gets admin credentials, and service images use persisted storage URLs because app service listings must be shared consistently.
