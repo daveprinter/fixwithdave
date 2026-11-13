@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep service catalog edits in Lovable Cloud with server-verified admin access; browser code never gets admin credentials, and service images use persisted storage URLs because app service listings must be shared consistently.
+- Keep the public service catalog in Lovable Cloud; public reads are safe, but edits and admin-code checks stay server-verified, code values are stored as salted hashes, and uploaded images persist with each listing because public storage is unavailable.
