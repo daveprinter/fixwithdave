@@ -9,7 +9,7 @@
 
 ## Technical approach
 - Use Lovable Cloud tables with explicit grants and row-level security for the service catalog and admin-code verification data; privileged changes go through protected server functions.
-- Store uploaded card images in private storage and serve them through authenticated, short-lived links because public storage buckets are blocked in this workspace.
+- Persist uploaded card images with the service catalog because public storage buckets are blocked in this workspace.
 - Keep the Bachs credential in the linked secure connection and create checkout sessions through the server-side connector gateway. Load Bachs’ documented browser checkout overlay only after a customer starts payment.
 - Treat checkout completion as a customer-facing state only; do not claim order fulfillment is confirmed by the browser event.
 
