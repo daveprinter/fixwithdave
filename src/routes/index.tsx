@@ -3,6 +3,9 @@ import { useState } from "react";
 import { MessageCircle, Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import techtallyIcon from "../assets/techtally-icon.png";
 import serviceOffice from "../assets/service-office.jpg";
@@ -21,6 +24,163 @@ const FLYER_URL = SITE_URL + techtallyFlyer;
 const WHATSAPP_URL =
   "https://wa.me/254716345324?text=" +
   encodeURIComponent("Hello there. I would like to inquire about your services.");
+
+declare global {
+  interface Window {
+    Bachs?: {
+      Initialize: (options?: { onEvent?: (event: { type: string }) => void }) => unknown;
+      Checkout: {
+        open: (options: { checkoutUrl: string; options?: { showCloseButton?: boolean; autoCloseOnComplete?: boolean } }) => Promise<unknown>;
+      };
+    };
+  }
+}
+
+const BACHS_SCRIPT_URL = "https://checkout.bachs.io/bachs.js";
+
+function loadBachsCheckout(): Promise<void> {
+  if (window.Bachs) return Promise.resolve();
+
+  return new Promise((resolve, reject) => {
+    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${BACHS_SCRIPT_URL}"]`);
+    const script = existingScript ?? document.createElement("script");
+    const onLoad = () => resolve();
+    const onError = () => reject(new Error("The payment window could not be loaded."));
+
+    script.addEventListener("load", onLoad, { once: true });
+    script.addEventListener("error", onError, { once: true });
+    if (!existingScript) {
+      script.src = BACHS_SCRIPT_URL;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  });
+}
+
+function PaymentDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+  const [step, setStep] = useState<"amount" | "email">("amount");
+  const [amount, setAmount] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const close = (nextOpen: boolean) => {
+    if (!nextOpen) {
+      setStep("amount");
+      setAmount("");
+      setEmail("");
+      setError("");
+      setBusy(false);
+    }
+    onOpenChange(nextOpen);
+  };
+
+  const continueToEmail = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const parsedAmount = Number(amount);
+    if (!Number.isFinite(parsedAmount) || parsedAmount <= 0 || !/^\d+(?:\.\d{1,2})?$/.test(amount.trim())) {
+      setError("Enter an amount greater than zero, with up to two decimal places.");
+      return;
+    }
+    setError("");
+    setStep("email");
+  };
+
+  const startCheckout = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+    setBusy(true);
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: amount.trim(), email: email.trim() }),
+      });
+      const result = (await response.json()) as { checkoutUrl?: string; error?: string };
+      if (!response.ok || !result.checkoutUrl) {
+        throw new Error(result.error ?? "Could not start checkout. Please try again.");
+      }
+
+      await loadBachsCheckout();
+      const bachs = window.Bachs;
+      if (!bachs) throw new Error("The payment window could not be loaded. Please try again.");
+      bachs.Initialize();
+      await bachs.Checkout.open({
+        checkoutUrl: result.checkoutUrl,
+        options: { showCloseButton: true, autoCloseOnComplete: true },
+      });
+      close(false);
+    } catch (checkoutError) {
+      setError(checkoutError instanceof Error ? checkoutError.message : "Could not start checkout. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={close}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Pay with Bachs</DialogTitle>
+          <DialogDescription>
+            {step === "amount" ? "Choose the amount you’d like to pay in US dollars." : "Enter your email to receive your receipt."}
+          </DialogDescription>
+        </DialogHeader>
+        {step === "amount" ? (
+          <form onSubmit={continueToEmail} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="payment-amount">Amount (USD)</Label>
+              <Input
+                id="payment-amount"
+                type="number"
+                min="0.01"
+                step="0.01"
+                inputMode="decimal"
+                autoComplete="off"
+                placeholder="0.00"
+                value={amount}
+                onChange={(event) => setAmount(event.target.value)}
+                required
+              />
+            </div>
+            {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+            <DialogFooter>
+              <Button type="submit">Continue</Button>
+            </DialogFooter>
+          </form>
+        ) : (
+          <form onSubmit={startCheckout} className="space-y-4">
+            <div className="rounded-md border border-border px-3 py-2 text-sm">
+              Amount: <strong>${Number(amount).toFixed(2)} USD</strong>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="receipt-email">Receipt email</Label>
+              <Input
+                id="receipt-email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
+            </div>
+            {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+            <DialogFooter className="gap-2 sm:gap-2">
+              <Button type="button" variant="outline" onClick={() => { setError(""); setStep("amount"); }} disabled={busy}>
+                Back
+              </Button>
+              <Button type="submit" disabled={busy}>
+                {busy ? "Opening checkout…" : "Proceed to payment"}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 
 export const Route = createFileRoute("/")({
@@ -113,6 +273,7 @@ const sideMenu = [
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background font-sans text-secondary">
@@ -277,7 +438,7 @@ function Index() {
                   >
                     Book Now →
                   </a>
-                    <Button type="button" size="sm" disabled title="Online payments will be available after payment setup.">
+                    <Button type="button" size="sm" onClick={() => setPaymentOpen(true)}>
                       Pay Now
                     </Button>
                     </div>
@@ -331,7 +492,7 @@ function Index() {
                     >
                       CLEAN IT NOW
                     </a>
-                    <Button type="button" disabled title="Online payments will be available after payment setup.">
+                    <Button type="button" onClick={() => setPaymentOpen(true)}>
                       Pay Now
                     </Button>
                   </div>
@@ -423,8 +584,7 @@ function Index() {
                   <Button
                     type="button"
                     size="sm"
-                    disabled
-                    title="Online payments will be available after payment setup."
+                    onClick={() => setPaymentOpen(true)}
                     className="mt-3 w-fit"
                   >
                     Pay Now
@@ -465,6 +625,7 @@ function Index() {
           © {new Date().getFullYear()} TechTally. PC support and software services.
         </p>
       </footer>
+      <PaymentDialog open={paymentOpen} onOpenChange={setPaymentOpen} />
     </div>
   );
 }
