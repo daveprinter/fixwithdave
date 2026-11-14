@@ -1,5 +1,5 @@
 # Current work
 - [ ] Create and seed the persistent service catalog and hashed admin codes.
 - [ ] Add the code-protected service editor and public catalog display.
-- [ ] Connect custom/fixed USD payments to Bachs checkout overlay.
-- [ ] Run targeted tests and verify the admin and payment flows in the preview.
+- [x] Connect custom USD payments to the Bachs checkout overlay using the existing secure connection.
+- [ ] Run targeted tests and verify checkout setup in the preview; no live payment will be submitted.

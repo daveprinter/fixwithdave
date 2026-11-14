@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep the public service catalog in Lovable Cloud; public reads are safe, but edits and admin-code checks stay server-verified, code values are stored as salted hashes, and uploaded images persist with each listing because public storage is unavailable.
+- Create payment sessions in a TanStack server route using the linked Bachs connection; expose only the hosted checkout URL to the browser so credentials remain private.
