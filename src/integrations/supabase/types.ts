@@ -59,6 +59,27 @@ export type Database = {
         }
         Relationships: []
       }
+      techtally_admin_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          token_hash: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          token_hash: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          token_hash?: string
+        }
+        Relationships: []
+      }
       techtally_services: {
         Row: {
           created_at: string
