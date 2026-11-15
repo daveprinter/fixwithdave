@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1794731014366,
+      "tag": "0000_create_techtally_service_admin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794731107802,
+      "tag": "0001_create_techtally_admin_sessions",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794731130827,
+      "tag": "0002_add_techtally_service_headline",
+      "breakpoints": true
+    }
+  ]
 }

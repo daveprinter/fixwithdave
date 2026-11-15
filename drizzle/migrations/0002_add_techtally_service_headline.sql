@@ -1,0 +1,1 @@
+ALTER TABLE public.techtally_services ADD COLUMN headline TEXT;
