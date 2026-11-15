@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      techtally_admin_attempts: {
+        Row: {
+          attempt_key: string
+          attempted_at: string
+          id: string
+        }
+        Insert: {
+          attempt_key: string
+          attempted_at?: string
+          id?: string
+        }
+        Update: {
+          attempt_key?: string
+          attempted_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      techtally_admin_codes: {
+        Row: {
+          code_hash: string
+          code_name: string
+          id: string
+          iterations: number
+          salt: string
+          updated_at: string
+        }
+        Insert: {
+          code_hash: string
+          code_name: string
+          id?: string
+          iterations?: number
+          salt: string
+          updated_at?: string
+        }
+        Update: {
+          code_hash?: string
+          code_name?: string
+          id?: string
+          iterations?: number
+          salt?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      techtally_services: {
+        Row: {
+          created_at: string
+          description: string
+          highlight: string | null
+          id: string
+          image_alt: string
+          image_data: string
+          is_visible: boolean
+          items: string[]
+          price_usd: number | null
+          service_key: string | null
+          show_price: boolean
+          sort_order: number
+          tag: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          highlight?: string | null
+          id?: string
+          image_alt?: string
+          image_data?: string
+          is_visible?: boolean
+          items?: string[]
+          price_usd?: number | null
+          service_key?: string | null
+          show_price?: boolean
+          sort_order?: number
+          tag?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          highlight?: string | null
+          id?: string
+          image_alt?: string
+          image_data?: string
+          is_visible?: boolean
+          items?: string[]
+          price_usd?: number | null
+          service_key?: string | null
+          show_price?: boolean
+          sort_order?: number
+          tag?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
